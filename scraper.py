@@ -10,9 +10,15 @@ page = requests.get('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
 # on utilise page.content plutôt que page.text parce que html.fromstring attend implicitement des bytes en entrée
 content = html.fromstring(page.content)
 
+# ============================================================================
+
 
 def get_data(xpath):
-    """fonction qui récupère une liste de contenus ciblée par un xpath et en retourne le premier élément"""
+    """
+    fonction qui récupère une liste de contenus ciblée par un xpath et en retourne le premier élément
+
+    La méthode xpath() parse un objet et renvoit une liste contenant toutes les occurences du chemin passé en argument
+    """
     return [x.strip() for x in content.xpath(xpath)][0]
 
 
@@ -42,3 +48,19 @@ print(f"clôture :   {closing}")
 print(f"ouverture : {opening}")
 print(f"plus haut : {higher}")
 print(f"plus bas :  {lower}")
+
+"""
+# code tiré de https://oxylabs.io/blog/lxml-tutorial#Handling
+response = requests.get('http://books.toscrape.com/')
+print(response.text)
+
+# idem
+response = requests.get('https://en.wikipedia.org/wiki/List_of_countries_by_population_in_2010')
+print(response.text)
+
+tree = html.fromstring(response.text)
+countries = tree.xpath('//span[@class="flagicon"]')
+print(countries)
+for country in countries:
+    print(country.xpath('./following-sibling::a/text()')[0])
+"""
