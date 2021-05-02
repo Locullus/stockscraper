@@ -5,7 +5,7 @@ from datetime import date
 year = date.today().year
 
 # on utilise requests.get pour récupérer la page web et on la parse avec le module html
-page = requests.get('https://fr.investing.com/indices/france-40-historical-data')
+page = requests.get('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
 
 # on utilise page.content plutôt que page.text parce que html.fromstring attend implicitement des bytes en entrée
 content = html.fromstring(page.content)
