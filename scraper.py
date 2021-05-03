@@ -24,32 +24,32 @@ index = 5 if opened else 6
 date_xpath = '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]/div[1]\
 /div/div/table/thead/tr/th[{}]/text()'
 
-# on crée la boucle qui va scraper les données
-list_date = []
-for i in range(2, index+1):
-    result = get_data(content, date_xpath.format(i))
-    list_date.append(result)
-print(list_date)
+row_xpath = '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
+/div[1]/div/div/table/tbody/tr[{}]/td[{}]/text()'
 
-# le cours de fermeture
-closing = get_data(content, '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
-/div[1]/div/div/table/tbody/tr[1]/td[6]/text()')
+# on crée la boucle qui va scraper les dates
+date_list = [get_data(content, date_xpath.format(i)) for i in range(2, index+1)]
+print(date_list)
 
-# le cours d'ouverture
-opening = get_data(content, '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
-/div[1]/div/div/table/tbody/tr[3]/td[6]/text()')
+# boucle qui va scraper les cours de fermeture  1 6
+closing_list = [get_data(content, row_xpath.format(1, i)) for i in range(2, index+1)]
+print(closing_list)
 
-# le cours le plus haut
-higher = get_data(content, '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
-/div[1]/div/div/table/tbody/tr[4]/td[6]/text()')
+# boucle qui va scraper les cours d'ouverture   3 6
+opening_list = [get_data(content, row_xpath.format(3, i)) for i in range(2, index+1)]
+print(opening_list)
 
-# le cours le plus bas
-lower = get_data(content, '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
-/div[1]/div/div/table/tbody/tr[5]/td[6]/text()')
+# boucle qui va scraper les plus haut   4 6
+higher_list = [get_data(content, row_xpath.format(4, i)) for i in range(2, index+1)]
+print(higher_list)
+
+# boucle qui va scraper les plus bas    5 6
+lower_list = [get_data(content, row_xpath.format(5, i)) for i in range(2, index+1)]
+print(lower_list)
 
 # on affiche les résultats
-print(f"date :      {list_date[-1]}-{year}")
-print(f"clôture :   {closing}")
-print(f"ouverture : {opening}")
-print(f"plus haut : {higher}")
-print(f"plus bas :  {lower}")
+print(f"date :      {date_list[-1]}-{year}")
+print(f"clôture :   {closing_list[-1]}")
+print(f"ouverture : {opening_list[-1]}")
+print(f"plus haut : {higher_list[-1]}")
+print(f"plus bas :  {lower_list[-1]}")
