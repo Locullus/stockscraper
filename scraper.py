@@ -48,19 +48,3 @@ print(f"clôture :   {closing}")
 print(f"ouverture : {opening}")
 print(f"plus haut : {higher}")
 print(f"plus bas :  {lower}")
-
-"""
-# code tiré de https://oxylabs.io/blog/lxml-tutorial#Handling
-response = requests.get('http://books.toscrape.com/')
-print(response.text)
-
-# idem
-response = requests.get('https://en.wikipedia.org/wiki/List_of_countries_by_population_in_2010')
-print(response.text)
-
-tree = html.fromstring(response.text)
-countries = tree.xpath('//span[@class="flagicon"]')
-print(countries)
-for country in countries:
-    print(country.xpath('./following-sibling::a/text()')[0])
-"""
