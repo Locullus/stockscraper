@@ -38,7 +38,7 @@ lower_list = [get_data(content, row_xpath.format(5, i)) for i in range(2, index)
 length = len(date_list)
 scraping_list = [[date_list[i], closing_list[i], opening_list[i], higher_list[i], lower_list[i]] for i in range(length)]
 
-# on affiche le résultat
-for element in scraping_list:
-    print(element)
+# on inverse la liste pour qu'elle fournisse les dates de la plus récente à la plus ancienne
+# ceci va permettre de mettre à jour la base uniquementles avec les éléments les plus récents
+scraping_list.reverse()
 
