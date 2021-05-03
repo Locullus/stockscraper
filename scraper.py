@@ -1,8 +1,13 @@
 from lxml import html
 import requests
-from datetime import date
+import datetime
 
-year = date.today().year
+# on récupère la date et l'heure pour vérifier si le marché est fermé
+year = datetime.date.year
+hour = datetime.datetime.now().hour
+
+if hour > 7 or hour < 18:
+    close = True
 
 # on utilise requests.get pour récupérer la page web et on la parse avec le module html
 page = requests.get('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
