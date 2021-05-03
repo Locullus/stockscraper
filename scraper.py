@@ -1,8 +1,6 @@
-from lxml import html
-import requests
 from datetime import datetime, date
 
-from functions import get_data
+from functions import parsing_url, get_data
 
 # on récupère la date et l'heure du jour
 year = date.today().year
@@ -13,9 +11,8 @@ opened = False
 if 7 < hour < 19:
     opened = True
 
-# url de la page web à analyser avec le module html
-response = requests.get('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
-content = html.fromstring(response.content)
+# on récupère le contenu parsé d'une page html
+content = parsing_url('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
 
 # on définit les xpath
 date_xpath = '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]/div[1]\
