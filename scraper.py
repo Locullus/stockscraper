@@ -10,7 +10,7 @@ hour = datetime.now().hour
 opened = False
 
 # on vérifie si le marché est fermé
-if hour > 7 or hour < 18:
+if 7 < hour < 19:
     opened = True
 
 # url de la page web à analyser avec le module html
