@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from database import engine, CAC
 
-from scraper import scraping_list
+from scraper import scraping_list_CAC
 
 Session = sessionmaker(bind=engine)
 
@@ -13,19 +13,13 @@ session.close()
 
 # on crée une liste des éléments à ajouter à la base de données dans l'ordre chronologique
 committing_list = []
-for element in scraping_list:
+for element in scraping_list_CAC:
     if element[0] not in last_high or last_high is None:
         committing_list.insert(0, element)
     else:
         break
 for element in committing_list:
     print(element)
-
-# pour supprimer toute les entrées depuis l'indice 4 de la table CAC
-session = Session()
-session.query(CAC).filter(CAC.id >= 6).delete()
-session.commit()
-session.close()
 
 # on ouvre une nouvelle session pour peupler la base de données avec les éléments de la liste précédente
 session = Session()
@@ -48,6 +42,10 @@ print(f"La date la plus récente après la mise à jour de la base de donnée : 
 session.close()
 
 """
-
+# pour supprimer toute les entrées depuis l'indice 4 de la table CAC
+session = Session()
+session.query(CAC).filter(CAC.id >= 6).delete()
+session.commit()
+session.close()
 
 """
