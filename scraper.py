@@ -20,3 +20,8 @@ lvc_content = parsing_url('https://www.boursorama.com/bourse/trackers/cours/1rTL
 scraping_list_LVC = scraper(STOCKS_xpath_dict, lvc_content)
 for element in scraping_list_LVC:
     print(element)
+
+bx4_content = parsing_url('https://www.boursorama.com/bourse/trackers/cours/1rTBX4/')
+scraping_list_BX4 = scraper(STOCKS_xpath_dict, bx4_content)
+for element in scraping_list_BX4:
+    print(element)
