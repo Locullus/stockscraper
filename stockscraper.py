@@ -29,7 +29,7 @@ def get_data(content, xpath):
 def scraper(xpath_dict, content):
     """
     fonction qui analyse un page html pour récupérer les valeurs d'un sous-jacent depuis leur xpath
-    :param x_path_dict: dictionnaire contenant les x_path des contenus recherchés
+    :param xpath_dict: dictionnaire contenant les x_path des contenus recherchés
     :param content: la page parsée
     :return: une liste de string [date, closing, opening, higher, lower]
     """
