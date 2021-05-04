@@ -8,6 +8,15 @@ Base = declarative_base()
 
 
 class CAC(Base):
+
+    """
+    classe gérant une TABLE  de la base de données.
+
+    Ici la classe étendant Base = declarative_Base(), deux paramètres sont obligatoires :
+    - le nom de la table __tablename__
+    - une Column() avec une primary_key
+    """
+
     __tablename__ = 'cac'
 
     id = Column(Integer, primary_key=True)
@@ -28,6 +37,7 @@ class CAC(Base):
 
 
 class LVC(Base):
+
     __tablename__ = 'lvc'
 
     id = Column(Integer, primary_key=True)
@@ -48,6 +58,7 @@ class LVC(Base):
 
 
 class BX4(Base):
+
     __tablename__ = 'bx4'
 
     id = Column(Integer, primary_key=True)
