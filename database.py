@@ -27,5 +27,45 @@ class CAC(Base):
                 """
 
 
+class LVC(Base):
+    __tablename__ = 'lvc'
+
+    id = Column(Integer, primary_key=True)
+    date = Column(String)
+    closing = Column(Integer)
+    opening = Column(Integer)
+    higher = Column(Integer)
+    lower = Column(Integer)
+
+    def __repr__(self):
+        return f"""
+            le {self.date} :
+            le LVC a clôturé à {self.closing}
+            Il avait ouvert à {self.opening}
+            Il a atteint {self.higher} au plus haut
+            Au plus bas il a touché {self.lower}
+                """
+
+
+class BX4(Base):
+    __tablename__ = 'bx4'
+
+    id = Column(Integer, primary_key=True)
+    date = Column(String)
+    closing = Column(Integer)
+    opening = Column(Integer)
+    higher = Column(Integer)
+    lower = Column(Integer)
+
+    def __repr__(self):
+        return f"""
+            le {self.date} :
+            le BX4 a clôturé à {self.closing}
+            Il avait ouvert à {self.opening}
+            Il a atteint {self.higher} au plus haut
+            Au plus bas il a touché {self.lower}
+                """
+
+
 # la création de la base doit se trouver après la déclaration de la Table (via la classe)
 Base.metadata.create_all(engine)
