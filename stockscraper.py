@@ -26,26 +26,25 @@ def get_data(content, xpath):
     return [x.strip() for x in content.xpath(xpath)][0]
 
 
-def scraper(content):
+def scraper(x_path_dict, content):
     """
     fonction qui analyse un page html pour récupérer les valeurs d'un sous-jacent depuis leur xpath
+    :param x_path_dict: dictionnaire contenant les x_path des contenus recherchés
     :param content: la page parsée
     :return: une liste de string [date, closing, opening, higher, lower]
     """
-    # on récupère la date et l'heure du jour
+    # on récupère la date et l'heure du jour et on initialise l'état du marché à fermé
     year = date.today().year
     hour = datetime.now().hour
     opened = False
 
-    # on vérifie si le marché est fermé
+    # on définit les xpath
+    date_xpath = x_path_dict['date_xpath']
+    row_xpath = x_path_dict['row_xpath']
+
+    # on vérifie si le marché est ouvert
     if 7 < hour < 19:
         opened = True
-    # on définit les xpath
-    date_xpath = '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]/div[1]\
-    /div/div/table/thead/tr/th[{}]/text()'
-
-    row_xpath = '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
-    /div[1]/div/div/table/tbody/tr[{}]/td[{}]/text()'
 
     # on détermine le nombre de données à récupérer en fonction de l'état du marché (ouvert ou fermé)
     index = 6 if opened else 7
