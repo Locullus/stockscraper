@@ -6,13 +6,12 @@ x_path_dict = {'date_xpath': '//*[@id="main-content"]/div/section[1]/div[2]/arti
                'row_xpath': '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/div[5]/div[2]\
                /div[1]/div/div/table/tbody/tr[{}]/td[{}]/text()'}
 
-# on récupère le contenu parsé d'une page html
-cac_content = parsing_url('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
-
+# parsing des données
+cac_content = parsing_url('https://www.boursorama.com/bourse/trackers/cours/1rTLVC/')
 scraping_list_CAC = scraper(x_path_dict, cac_content)
-for element in scraping_list_CAC:
-    print(element)
 
-# on va pouvoir scraper le LVC et le BX4 en changeant simplement l'url de content
-# lvc_content = parsing_url('...')
-# scraping_list_LVC = scraper(lvc_content)
+lvc_content = parsing_url('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
+scraping_list_LVC = scraper(x_path_dict, lvc_content)
+
+bx4_content = parsing_url('https://www.boursorama.com/bourse/trackers/cours/1rTBX4/')
+scraping_list_BX4 = scraper(x_path_dict, bx4_content)
