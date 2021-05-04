@@ -1,12 +1,22 @@
 from stockscraper import parsing_url, scraper
 
-# on récupère le contenu parsé d'une page html
-cac_content = parsing_url('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
+# on crée un dictionnaire prenant en valeur les xpath à scraper
+CAC_xpath_dict = {'date_xpath': '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]/\
+div[5]/div[2]/div[1]/div/div/table/thead/tr/th[{}]/text()',
+                  'row_xpath': '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[2]/div[1]\
+                   /div[5]/div[2]/div[1]/div/div/table/tbody/tr[{}]/td[{}]/text()'}
+STOCKS_xpath_dict = {'date_xpath': '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[1]/div[1]\
+/div[6]/div[2]/div[1]/div/div/table/thead/tr/th[{}]/text()',
+                     'row_xpath': '//*[@id="main-content"]/div/section[1]/div[2]/article/div[1]/div[1]/div[1]\
+                      /div[6]/div[2]/div[1]/div/div/table/tbody/tr[{}]/td[{}]/text()'}
 
-scraping_list_CAC = scraper(cac_content)
+# on scrape les données des valeurs CAC, LVC et BX4 et on les liste
+cac_content = parsing_url('https://www.boursorama.com/bourse/indices/cours/1rPCAC/')
+scraping_list_CAC = scraper(CAC_xpath_dict, cac_content)
 for element in scraping_list_CAC:
     print(element)
 
-# on va pouvoir scraper le LVC et le BX4 en changeant simplement l'url de content
-# lvc_content = parsing_url('...')
-# scraping_list_LVC = scraper(lvc_content)
+lvc_content = parsing_url('https://www.boursorama.com/bourse/trackers/cours/1rTLVC/')
+scraping_list_LVC = scraper(STOCKS_xpath_dict, lvc_content)
+for element in scraping_list_LVC:
+    print(element)
