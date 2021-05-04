@@ -1,7 +1,5 @@
 from sqlalchemy.orm import sessionmaker
-from database import engine, CAC, LVC, BX4
-
-from scraper import scraping_list_CAC, scraping_list_LVC, scraping_list_BX4
+from database import engine
 
 Session = sessionmaker(bind=engine)
 
@@ -16,7 +14,6 @@ def stocks_db_update(TABLE, scraping_list):
     # on ouvre une session pour récupérer la date la plus récente de la base de données
     session = Session()
     last_high = str(session.query(TABLE.date).order_by(TABLE.id.desc()).first())
-    print(f"La date la plus récente dans la base de donnée {TABLE.__tablename__}: {last_high}")
     session.close()
 
     # on crée une liste des éléments à ajouter à la base de données dans l'ordre chronologique
@@ -26,8 +23,6 @@ def stocks_db_update(TABLE, scraping_list):
             committing_list.insert(0, element)
         else:
             break
-    for element in committing_list:
-        print(element)
 
     # on ouvre une nouvelle session pour peupler la base de données avec les éléments de la liste précédente
     session = Session()
@@ -41,15 +36,3 @@ def stocks_db_update(TABLE, scraping_list):
         )
         session.add(data)
     session.commit()
-
-    # pour récupérer toutes les entrées d'une TABLE
-    session = Session()
-    datas = session.query(TABLE).all()
-    print(datas)
-    session.close()
-
-
-# ====================== update des Stocks scrapées ======================
-stocks_db_update(CAC, scraping_list_CAC)
-stocks_db_update(LVC, scraping_list_LVC)
-stocks_db_update(BX4, scraping_list_BX4)

@@ -3,8 +3,6 @@ from lxml import html
 from datetime import datetime, date
 
 
-# ====================== fonctions =====================
-
 def parsing_url(url):
     """
     fonction qui convertit en string le contenu renvoyé par une requête à une url
