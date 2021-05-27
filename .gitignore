@@ -1,5 +1,4 @@
 /venv/
-archive.py
 database.db
 __pycache__/
 .idea/
