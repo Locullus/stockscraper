@@ -33,3 +33,5 @@ session = Session()
 update_CAC = session.query(CAC).all()
 print("On affiche le contenu de la TABLE CAC :")
 print(update_CAC)
+
+# TODO : créer une appli flask sur cette base en réorganisant les fichiers et en créant un template
