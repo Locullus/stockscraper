@@ -31,8 +31,15 @@ stocks_db_update(BX4, scraping_list_BX4)
 # on interroge la base de données et on affiche le résultat
 session = Session()
 update_CAC = session.query(CAC).all()
+session.close()
 print("On affiche le contenu de la TABLE CAC :")
 print(update_CAC)
+
+# on affiche le nombre d'entrées sauvagardées dans la BDD
+session = Session()
+last_id = session.query(CAC.id).order_by(CAC.id.desc()).first()
+print(f"la dernière entrée dans la base de données a l'id n°{last_id}")
+session.close()
 
 # TODO : créer une appli flask sur cette base en réorganisant les fichiers et en créant un template
 # TODO : connecter l'appli webscraper à la database ici créée
