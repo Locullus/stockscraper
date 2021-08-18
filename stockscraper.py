@@ -63,3 +63,5 @@ def scraper(xpath_dict, content):
     # ceci va permettre de mettre à jour la base uniquementles avec les éléments les plus récents
     scraping_list.reverse()
     return scraping_list
+
+# le 18/08, la dernière entrée dans la base de données a l'id n°(82,)
