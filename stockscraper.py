@@ -14,7 +14,7 @@ def parsing_url(url):
     return content
 
 
-def get_data(content, xpath):
+def scraping_data(content, xpath):
     """
     fonction qui récupère une liste de contenus ciblée par un xpath et en retourne le premier élément
     :param content: le contenu parsé d'un document html
@@ -48,11 +48,11 @@ def scraper(xpath_dict, content):
     index = 6 if opened else 7
 
     # on crée les boucles qui vont scraper les différentes données
-    date_list = [(get_data(content, date_xpath.format(i)) + '-' + str(year)) for i in range(2, index)]
-    closing_list = [get_data(content, row_xpath.format(1, i)) for i in range(2, index)]
-    opening_list = [get_data(content, row_xpath.format(3, i)) for i in range(2, index)]
-    higher_list = [get_data(content, row_xpath.format(4, i)) for i in range(2, index)]
-    lower_list = [get_data(content, row_xpath.format(5, i)) for i in range(2, index)]
+    date_list = [(scraping_data(content, date_xpath.format(i)) + '-' + str(year)) for i in range(2, index)]
+    closing_list = [scraping_data(content, row_xpath.format(1, i)) for i in range(2, index)]
+    opening_list = [scraping_data(content, row_xpath.format(3, i)) for i in range(2, index)]
+    higher_list = [scraping_data(content, row_xpath.format(4, i)) for i in range(2, index)]
+    lower_list = [scraping_data(content, row_xpath.format(5, i)) for i in range(2, index)]
 
     # on crée la liste des données scrapées que l'on enverra à la base de données
     length = len(date_list)
