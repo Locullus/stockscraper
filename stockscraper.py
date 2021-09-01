@@ -14,9 +14,10 @@ def parsing_url(url):
     return content
 
 
-def get_data(content, xpath):
+def scraping_data(content, xpath):
     """
     fonction qui récupère une liste de contenus ciblée par un xpath et en retourne le premier élément
+    NOTE : xpath retournant une liste il nous faut en extraire notre unique élément à l'indice 0
     :param content: le contenu parsé d'un document html
     :param xpath: le chemin d'accès à un élément ciblé
     :return: string
@@ -26,7 +27,7 @@ def get_data(content, xpath):
 
 def scraper(xpath_dict, content):
     """
-    fonction qui analyse un page html pour récupérer les valeurs d'un sous-jacent depuis leur xpath
+    fonction qui analyse un page html pour récupérer les valeurs d'un sous-jacent depuis un xpath
     :param xpath_dict: dictionnaire contenant les x_path des contenus recherchés
     :param content: la page parsée
     :return: une liste de string [date, closing, opening, higher, lower]
@@ -48,11 +49,11 @@ def scraper(xpath_dict, content):
     index = 6 if opened else 7
 
     # on crée les boucles qui vont scraper les différentes données
-    date_list = [(get_data(content, date_xpath.format(i)) + '-' + str(year)) for i in range(2, index)]
-    closing_list = [get_data(content, row_xpath.format(1, i)) for i in range(2, index)]
-    opening_list = [get_data(content, row_xpath.format(3, i)) for i in range(2, index)]
-    higher_list = [get_data(content, row_xpath.format(4, i)) for i in range(2, index)]
-    lower_list = [get_data(content, row_xpath.format(5, i)) for i in range(2, index)]
+    date_list = [(scraping_data(content, date_xpath.format(i)) + '-' + str(year)) for i in range(2, index)]
+    closing_list = [scraping_data(content, row_xpath.format(1, i)) for i in range(2, index)]
+    opening_list = [scraping_data(content, row_xpath.format(3, i)) for i in range(2, index)]
+    higher_list = [scraping_data(content, row_xpath.format(4, i)) for i in range(2, index)]
+    lower_list = [scraping_data(content, row_xpath.format(5, i)) for i in range(2, index)]
 
     # on crée la liste des données scrapées que l'on enverra à la base de données
     length = len(date_list)
@@ -60,8 +61,8 @@ def scraper(xpath_dict, content):
                       lower_list[i]] for i in range(length)]
 
     # on inverse la liste pour qu'elle fournisse les dates de la plus récente à la plus ancienne
-    # ceci va permettre de mettre à jour la base uniquementles avec les éléments les plus récents
-    scraping_list.reverse()
+    # ceci va permettre de mettre à jour la base uniquement avec les éléments les plus récents
+    scraping_list.reverse()     # reverse() modifiant la liste, on doit l'exécuter avant de pouvoir la retourner
     return scraping_list
 
 # le 18/08, la dernière entrée dans la base de données a l'id n°(82,)
